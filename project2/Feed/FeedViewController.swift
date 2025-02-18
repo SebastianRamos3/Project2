@@ -12,6 +12,7 @@ import ParseSwift
 
 class FeedViewController: UIViewController {
     
+    @IBOutlet weak var Lpic: UIImageView!
     @IBOutlet weak var PostCreate: UIButton!
     @IBOutlet weak var tableView: UITableView!
 
@@ -24,10 +25,6 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let logoImage = UIImage(named: "logo")
-        let logoImageView = UIImageView(image: logoImage)
-        logoImageView.contentMode = .scaleAspectFit
-        self.view.addSubview(logoImageView)
 
 
         tableView.delegate = self
