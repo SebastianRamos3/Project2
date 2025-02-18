@@ -11,7 +11,8 @@ import UIKit
 import ParseSwift
 
 class FeedViewController: UIViewController {
-
+    
+    @IBOutlet weak var PostCreate: UIButton!
     @IBOutlet weak var tableView: UITableView!
 
     private var posts = [Post]() {
@@ -23,6 +24,11 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let logoImage = UIImage(named: "logo")
+        let logoImageView = UIImageView(image: logoImage)
+        logoImageView.contentMode = .scaleAspectFit
+        self.view.addSubview(logoImageView)
+
 
         tableView.delegate = self
         tableView.dataSource = self
