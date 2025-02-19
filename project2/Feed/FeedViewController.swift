@@ -15,7 +15,10 @@ class FeedViewController: UIViewController {
     @IBOutlet weak var Lpic: UIImageView!
     @IBOutlet weak var PostCreate: UIButton!
     @IBOutlet weak var tableView: UITableView!
-
+    
+    private let refreshControl = UIRefreshControl()
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
+    
     private var posts = [Post]() {
         didSet {
             // Reload table view data any time the posts variable gets updated.
@@ -30,6 +33,13 @@ class FeedViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsSelection = false
+        self.navigationController?.navigationBar.titleTextAttributes = [
+                .foregroundColor: UIColor.white,
+                .font: UIFont(name: "AmericanTypewriter", size: 18) ?? UIFont.systemFont(ofSize: 18)
+            ]
+        
+        setupRefreshControl()
+        setupActivityIndicator()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +47,26 @@ class FeedViewController: UIViewController {
 
         queryPosts()
     }
+    private func setupRefreshControl() {
+            refreshControl.tintColor = UIColor.systemBlue
+
+            refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+
+            if #available(iOS 10.0, *) {
+                tableView.refreshControl = refreshControl
+            } else {
+                tableView.addSubview(refreshControl)
+            }
+        }
+    private func setupActivityIndicator() {
+            activityIndicator.center = view.center
+            view.addSubview(activityIndicator)
+        }
+
+    @objc private func refreshData() {
+            queryPosts()
+        }
+
 
     private func queryPosts() {
         // TODO: Pt 1 - Query Posts
@@ -44,12 +74,18 @@ class FeedViewController: UIViewController {
         // 1. Create a query to fetch Posts
         // 2. Any properties that are Parse objects are stored by reference in Parse DB and as such need to explicitly use `include_:)` to be included in query results.
         // 3. Sort the posts by descending order based on the created at date
+        if !refreshControl.isRefreshing {
+                    activityIndicator.startAnimating()
+                }
+        
         let query = Post.query()
             .include("user")
             .order([.descending("createdAt")])
 
         // Fetch objects (posts) defined in query (async)
         query.find { [weak self] result in
+            self?.activityIndicator.stopAnimating()
+            self?.refreshControl.endRefreshing()
             switch result {
             case .success(let posts):
                 // Update local posts property with fetched posts

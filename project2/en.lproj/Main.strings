@@ -1,0 +1,75 @@
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "0m4-H4-Bcc"; */
+"0m4-H4-Bcc.title" = " ";
+
+/* Class = "UITextField"; placeholder = "Username"; ObjectID = "5pD-xS-TXs"; */
+"5pD-xS-TXs.placeholder" = "Username";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "8UY-v9-SbL"; */
+"8UY-v9-SbL.title" = " ";
+
+/* Class = "UITextField"; placeholder = "Write a caption..."; ObjectID = "Amx-Rq-yFI"; */
+"Amx-Rq-yFI.placeholder" = "Write a caption...";
+
+/* Class = "UIButton"; configuration.title = "Sign Up."; ObjectID = "IET-Ub-6IG"; */
+"IET-Ub-6IG.configuration.title" = "Sign Up.";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "IET-Ub-6IG"; */
+"IET-Ub-6IG.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Post Picture"; ObjectID = "Irq-89-34U"; */
+"Irq-89-34U.configuration.title" = "Post Picture";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Irq-89-34U"; */
+"Irq-89-34U.normalTitle" = "Button";
+
+/* Class = "UIBarButtonItem"; title = "Log Out"; ObjectID = "RWR-ZY-myk"; */
+"RWR-ZY-myk.title" = "Log Out";
+
+/* Class = "UILabel"; text = "BeReal."; ObjectID = "XGx-Ld-H6T"; */
+"XGx-Ld-H6T.text" = "BeReal.";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "ZRk-ag-gPv"; */
+"ZRk-ag-gPv.placeholder" = "Email";
+
+/* Class = "UIButton"; configuration.title = "Log in"; ObjectID = "bfO-dy-o7P"; */
+"bfO-dy-o7P.configuration.title" = "Log in";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "bfO-dy-o7P"; */
+"bfO-dy-o7P.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "BeReal"; ObjectID = "cnZ-X1-iwj"; */
+"cnZ-X1-iwj.title" = "BeReal";
+
+/* Class = "UILabel"; text = "Kingsley"; ObjectID = "dQG-0t-OMT"; */
+"dQG-0t-OMT.text" = "Kingsley";
+
+/* Class = "UITextField"; placeholder = "Username"; ObjectID = "fTT-rM-c3u"; */
+"fTT-rM-c3u.placeholder" = "Username";
+
+/* Class = "UILabel"; text = "4 hours ago"; ObjectID = "fUP-Sn-Nbi"; */
+"fUP-Sn-Nbi.text" = "4 hours ago";
+
+/* Class = "UIButton"; configuration.title = "Sign Up"; ObjectID = "foU-o4-ATk"; */
+"foU-o4-ATk.configuration.title" = "Sign Up";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "foU-o4-ATk"; */
+"foU-o4-ATk.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Sign Up"; ObjectID = "ixb-cg-dMc"; */
+"ixb-cg-dMc.text" = "Sign Up";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "nAU-Ud-dn0"; */
+"nAU-Ud-dn0.placeholder" = "Password";
+
+/* Class = "UIBarButtonItem"; title = "Share"; ObjectID = "oL3-4g-14f"; */
+"oL3-4g-14f.title" = "Share";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "rcB-Ny-NGC"; */
+"rcB-Ny-NGC.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "ro2-Cf-yEI"; */
+"ro2-Cf-yEI.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "What an awesome day!"; ObjectID = "w5F-8W-aa3"; */
+"w5F-8W-aa3.text" = "What an awesome day!";
