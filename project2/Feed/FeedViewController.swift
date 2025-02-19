@@ -18,7 +18,8 @@ class FeedViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     private let activityIndicator = UIActivityIndicatorView(style: .large)
-    
+    private var isLoadingMorePosts = false
+
     private var posts = [Post]() {
         didSet {
             // Reload table view data any time the posts variable gets updated.
@@ -33,6 +34,7 @@ class FeedViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsSelection = false
+        
         self.navigationController?.navigationBar.titleTextAttributes = [
                 .foregroundColor: UIColor.white,
                 .font: UIFont(name: "AmericanTypewriter", size: 18) ?? UIFont.systemFont(ofSize: 18)
@@ -69,11 +71,7 @@ class FeedViewController: UIViewController {
 
 
     private func queryPosts() {
-        // TODO: Pt 1 - Query Posts
-        // https://github.com/parse-community/Parse-Swift/blob/3d4bb13acd7496a49b259e541928ad493219d363/ParseSwift.playground/Pages/2%20-%20Finding%20Objects.xcplaygroundpage/Contents.swift#L66
-        // 1. Create a query to fetch Posts
-        // 2. Any properties that are Parse objects are stored by reference in Parse DB and as such need to explicitly use `include_:)` to be included in query results.
-        // 3. Sort the posts by descending order based on the created at date
+
         if !refreshControl.isRefreshing {
                     activityIndicator.startAnimating()
                 }
@@ -82,21 +80,39 @@ class FeedViewController: UIViewController {
             .include("user")
             .order([.descending("createdAt")])
 
-        // Fetch objects (posts) defined in query (async)
         query.find { [weak self] result in
             self?.activityIndicator.stopAnimating()
             self?.refreshControl.endRefreshing()
             switch result {
             case .success(let posts):
-                // Update local posts property with fetched posts
                 self?.posts = posts
             case .failure(let error):
                 self?.showAlert(description: error.localizedDescription)
             }
         }
-
     }
+    private func loadMorePosts() {
+        activityIndicator.startAnimating()
 
+            
+        let query = Post.query()
+            .include("user")
+            .order([.descending("createdAt")])
+            .limit(10)
+            
+
+        query.find { [weak self] result in
+            self?.activityIndicator.stopAnimating()
+            switch result {
+            case .success(let newPosts):
+                self?.posts.append(contentsOf: newPosts)
+            case .failure(let error):
+                self?.showAlert(description: error.localizedDescription)
+                }
+            self?.isLoadingMorePosts = false
+            }
+        }
+    
     @IBAction func onLogOutTapped(_ sender: Any) {
         showConfirmLogoutAlert()
     }
@@ -134,4 +150,13 @@ extension FeedViewController: UITableViewDataSource {
     }
 }
 
-extension FeedViewController: UITableViewDelegate { }
+extension FeedViewController: UITableViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.frame.size.height - 50 {
+            if !isLoadingMorePosts {
+                isLoadingMorePosts = true
+                loadMorePosts()
+            }
+        }
+    }
+}
