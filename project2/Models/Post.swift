@@ -20,9 +20,11 @@ struct Post: ParseObject {
     var updatedAt: Date?
     var ACL: ParseACL?
     var originalData: Data?
+    
 
     // Your own custom properties.
     var caption: String?
     var user: User?
     var imageFile: ParseFile?
+    
 }

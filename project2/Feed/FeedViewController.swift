@@ -7,7 +7,6 @@
 
 import UIKit
 
-// TODO: Import Parse Swift
 import ParseSwift
 
 class FeedViewController: UIViewController {
@@ -22,7 +21,6 @@ class FeedViewController: UIViewController {
 
     private var posts = [Post]() {
         didSet {
-            // Reload table view data any time the posts variable gets updated.
             tableView.reloadData()
         }
     }

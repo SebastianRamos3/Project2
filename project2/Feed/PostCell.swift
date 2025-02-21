@@ -9,13 +9,13 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
+
 class PostCell: UITableViewCell {
 
     @IBOutlet private weak var usernameLabel: UILabel!
     @IBOutlet private weak var postImageView: UIImageView!
     @IBOutlet private weak var captionLabel: UILabel!
-    @IBOutlet private weak var dateLabel: UILabel!
-
+    @IBOutlet private weak var dateLabel: UILabel!    
     private var imageDataRequest: DataRequest?
 
     func configure(with post: Post) {
@@ -49,6 +49,8 @@ class PostCell: UITableViewCell {
         if let date = post.createdAt {
             dateLabel.text = DateFormatter.postFormatter.string(from: date)
         }
+        
+
     }
 
     override func prepareForReuse() {
@@ -61,4 +63,5 @@ class PostCell: UITableViewCell {
         imageDataRequest?.cancel()
 
     }
+
 }

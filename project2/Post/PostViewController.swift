@@ -113,38 +113,33 @@ extension PostViewController: PHPickerViewControllerDelegate {
         // Dismiss the picker
         picker.dismiss(animated: true)
 
-        // Make sure we have a non-nil item provider
+        // Ensure there's a valid item provider
         guard let provider = results.first?.itemProvider,
-           // Make sure the provider can load a UIImage
-           provider.canLoadObject(ofClass: UIImage.self) else { return }
+              provider.canLoadObject(ofClass: UIImage.self) else { return }
 
-        // Load a UIImage from the provider
+        // Load the UIImage
         provider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
+            // Ensure the object is a valid UIImage
+            guard let image = object as? UIImage else {
+                self?.showAlert()
+                return
+            }
 
-           // Make sure we can cast the returned object to a UIImage
-           guard let image = object as? UIImage else {
+            // Handle any errors
+            if let error = error {
+                self?.showAlert(description: error.localizedDescription)
+                return
+            }
 
-              // ❌ Unable to cast to UIImage
-              self?.showAlert()
-              return
-           }
+            // Update UI on the main thread
+            DispatchQueue.main.async {
+                // Set the image on the preview image view
+                self?.previewImageView.image = image
 
-           // Check for and handle any errors
-           if let error = error {
-               self?.showAlert(description: error.localizedDescription)
-              return
-           } else {
+                // Save the image for later use
+                self?.pickedImage = image
+            }
 
-              // UI updates (like setting image on image view) should be done on main thread
-              DispatchQueue.main.async {
-
-                 // Set image on preview image view
-                 self?.previewImageView.image = image
-
-                 // Set image to use when saving post
-                 self?.pickedImage = image
-              }
-           }
         }
     }
 }
